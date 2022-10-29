@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Auth Code Helper",
+  "version": "1.0.0",
+  "action": {},
+  "description": "Copy authentification code",
+  "icons": {},
+  "author": "kazumakano",
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
+}
