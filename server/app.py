@@ -25,7 +25,6 @@ def get_code_by_name(name: str) -> tuple[str, int]:
 
 @app.after_request
 def set_headers(res: flask.Response) -> flask.Response:
-    res.headers.set("Access-Control-Allow-Headers", "*")
     res.headers.set("Access-Control-Allow-Origin", "*")
     return res
 
