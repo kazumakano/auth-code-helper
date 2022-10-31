@@ -20,8 +20,7 @@ def post_account() -> tuple[str, int]:
 
 @app.route("/code/<name>")
 def get_code_by_name(name: str) -> tuple[str, int]:
-    account: Account = db.get_or_404(Account, name)
-    return pyotp.TOTP(account.seed).now(), 200
+    return pyotp.TOTP(db.get_or_404(Account, name).seed).now(), 200
 
 @app.after_request
 def set_headers(res: flask.Response) -> flask.Response:
