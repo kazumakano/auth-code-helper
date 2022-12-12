@@ -5,4 +5,4 @@ Param (
     $Port = 5000
 )
 
-curl --data "{\""name\"": \""$Name\"", \""seed\"": \""$Seed\""}" --header 'Content-Type: application/json' --request 'POST' "http://${HostName}:$Port/account"
+curl --data "{""name"": ""$Name"", ""seed"": ""$Seed""}" --header 'Content-Type: application/json' --request 'POST' "http://${HostName}:$Port/account"
