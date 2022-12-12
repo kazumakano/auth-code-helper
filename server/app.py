@@ -29,7 +29,8 @@ def set_headers(res: flask.Response) -> flask.Response:
 
 if __name__ == "__main__":
     import argparse
-    import waitress
+    import os.path as path
+    # import waitress
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--host", default="0.0.0.0", help="specify server host", metavar="HOST")
@@ -37,4 +38,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     init()
-    waitress.serve(app, host=args.host, port=args.port)
+    # waitress.serve(app, host=args.host, port=args.port)
+    ssl_dir = path.join(path.dirname(__file__), "key/")
+    app.run(host=args.host, port=args.port, ssl_context=(path.join(ssl_dir, "certificate.pem"), path.join(ssl_dir, "private.pem")))
