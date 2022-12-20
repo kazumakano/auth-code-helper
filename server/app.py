@@ -1,5 +1,7 @@
+import os.path as path
 import flask
 import pyotp
+import qrcode
 from database import Account, db
 
 
@@ -22,6 +24,11 @@ def post_account() -> tuple[str, int]:
 def get_code_by_name(name: str) -> tuple[str, int]:
     return pyotp.TOTP(db.get_or_404(Account, name).seed).now(), 200
 
+@app.route("/qr/<name>")
+def save_qr_by_name(name: str) -> tuple[str, int]:
+    qrcode.make(f"otpauth://totp/{name}?secret={db.get_or_404(Account, name).seed}").save(path.join(path.dirname(__file__), "qr/", name + ".png"))
+    return "No Content", 204
+
 @app.after_request
 def set_headers(res: flask.Response) -> flask.Response:
     res.headers.set("Access-Control-Allow-Origin", "*")
@@ -29,7 +36,6 @@ def set_headers(res: flask.Response) -> flask.Response:
 
 if __name__ == "__main__":
     import argparse
-    # import os.path as path
     import waitress
 
     parser = argparse.ArgumentParser()
