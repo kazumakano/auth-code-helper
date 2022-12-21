@@ -26,7 +26,7 @@ def get_code_by_name(name: str) -> tuple[str, int]:
 
 @app.route("/qr/<name>")
 def save_qr_by_name(name: str) -> tuple[str, int]:
-    qrcode.make(f"otpauth://totp/{name}?secret={db.get_or_404(Account, name).seed}").save(path.join(path.dirname(__file__), "qr/", name + ".png"))
+    qrcode.make(f"otpauth://totp/{name}?secret={db.get_or_404(Account, name).seed}&issuer={name}").save(path.join(path.dirname(__file__), "qr/", name + ".png"))
     return "No Content", 204
 
 @app.after_request
