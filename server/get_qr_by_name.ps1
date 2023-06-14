@@ -1,7 +1,9 @@
 Param (
     [parameter(mandatory=$True)] $Name,
     $HostName = '127.0.0.1',
-    $Port = 5000
+    $Port = 5000,
+    [switch] $Ssl
 )
 
-curl "http://${HostName}:$Port/qr/$Name"
+$proto = $Ssl ? 'https' : 'http'
+curl "${proto}://${HostName}:$Port/qr/$Name"
