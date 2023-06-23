@@ -1,4 +1,4 @@
-# auth-code-helper
+# Auth Code Helper
 This is personal helper tool for TOTP authentification, which includes:
 - light-weight server to manage accounts, calculate authentification code, and generate QR code
 - Chrome extension to copy code to clipboard
